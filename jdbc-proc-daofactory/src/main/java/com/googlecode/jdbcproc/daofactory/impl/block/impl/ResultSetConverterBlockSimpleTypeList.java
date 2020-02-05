@@ -15,15 +15,16 @@ import java.util.List;
  */
 public class ResultSetConverterBlockSimpleTypeList implements IResultSetConverterBlock {
 
-    public ResultSetConverterBlockSimpleTypeList(IParameterConverter aConverter, String aColumnName) {
+    public ResultSetConverterBlockSimpleTypeList(IParameterConverter aConverter, String aColumnName, Class aParameterType) {
         theConverter = aConverter;
         theColumnName = aColumnName;
+        theParameterType = aParameterType;
     }
 
     public Object convertResultSet(ResultSet aResultSet, CallableStatement aStmt) throws SQLException {
         List list = new ArrayList<>();
         while(aResultSet.next()) {
-            Object value = theConverter.getFromResultSet(aResultSet, theColumnName);
+            Object value = theConverter.getFromResultSet(aResultSet, theColumnName, theParameterType);
             list.add(value);
         }
         return Collections.unmodifiableList(list);
@@ -38,6 +39,7 @@ public class ResultSetConverterBlockSimpleTypeList implements IResultSetConverte
 
     private final IParameterConverter theConverter;
     private String theColumnName;
+    private final Class theParameterType;
 
 }
 

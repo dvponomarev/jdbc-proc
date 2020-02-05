@@ -19,11 +19,11 @@ public class ParameterConverter_INTEGER_int
         aStmt.setInt(aArgument, aValue);
     }
 
-    public Integer getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Integer getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getInt(aParameterName);
     }
 
-    public Integer getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Integer getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getInt(aParameterName);
     }
 

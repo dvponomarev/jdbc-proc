@@ -14,9 +14,10 @@ import org.springframework.dao.DataAccessException;
  */
 public class OutputParametersGetterHasReturnBlock implements IOutputParametersGetterBlock {
 
-    public OutputParametersGetterHasReturnBlock(IParameterConverter aConverter, StatementArgument aStatementArgument) {
+    public OutputParametersGetterHasReturnBlock(IParameterConverter aConverter, StatementArgument aStatementArgument, Class aParameterType) {
         theStatementArgument = aStatementArgument;
         theConverter = aConverter;
+        theParameterType = aParameterType;
     }
 
     public void fillOutputParameters(ICallableStatementGetStrategy aStmt, Object[] aArgs) throws DataAccessException {
@@ -28,10 +29,11 @@ public class OutputParametersGetterHasReturnBlock implements IOutputParametersGe
     }
 
     public Object getReturnValue(ICallableStatementGetStrategy aCallableStatementStrategy) throws SQLException {
-        return theConverter.getOutputParameter(aCallableStatementStrategy, theStatementArgument);
+        return theConverter.getOutputParameter(aCallableStatementStrategy, theStatementArgument, theParameterType);
     }
 
     private final IParameterConverter theConverter;
     private final StatementArgument theStatementArgument;
+    private final Class theParameterType;
 
 }

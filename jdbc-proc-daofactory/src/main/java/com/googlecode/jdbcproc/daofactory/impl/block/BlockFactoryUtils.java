@@ -111,6 +111,9 @@ public class BlockFactoryUtils {
      * @return true if simple java type
      */
     public static boolean isSimpleType(Class aType) {
+        if (aType.isEnum()) {
+            return true;
+        }
         return SIMPLE_TYPES.contains(aType);
     }
     

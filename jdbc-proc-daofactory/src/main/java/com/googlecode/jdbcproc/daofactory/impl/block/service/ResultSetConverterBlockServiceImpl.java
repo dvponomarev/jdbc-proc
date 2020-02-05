@@ -27,28 +27,26 @@ import com.googlecode.jdbcproc.daofactory.impl.block.impl.ResultSetConverterBloc
 import com.googlecode.jdbcproc.daofactory.impl.block.impl.ResultSetConverterBlockSimpleType;
 import com.googlecode.jdbcproc.daofactory.impl.block.impl.ResultSetConverterBlockSimpleTypeIterator;
 import com.googlecode.jdbcproc.daofactory.impl.block.impl.ResultSetConverterBlockSimpleTypeList;
-import com.googlecode.jdbcproc.daofactory.internal.ResultSetConverterRowIterator;
 import com.googlecode.jdbcproc.daofactory.impl.parameterconverter.IParameterConverter;
 import com.googlecode.jdbcproc.daofactory.impl.parameterconverter.ParameterConverterService;
 import com.googlecode.jdbcproc.daofactory.impl.procedureinfo.ResultSetColumnInfo;
 import com.googlecode.jdbcproc.daofactory.impl.procedureinfo.StoredProcedureInfo;
+import com.googlecode.jdbcproc.daofactory.internal.ResultSetConverterRowIterator;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+import org.springframework.util.Assert;
+import org.springframework.util.StringUtils;
 
+import javax.persistence.Column;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
+import javax.persistence.OneToOne;
 import java.lang.reflect.Method;
 import java.lang.reflect.ParameterizedType;
 import java.lang.reflect.Type;
 import java.util.Collection;
 import java.util.LinkedList;
 import java.util.List;
-
-import javax.persistence.Column;
-import javax.persistence.JoinColumn;
-import javax.persistence.ManyToOne;
-import javax.persistence.OneToOne;
-
-import org.slf4j.Logger;
-import org.slf4j.LoggerFactory;
-import org.springframework.util.Assert;
-import org.springframework.util.StringUtils;
 
 /**
  * Creates IResultSetConverter
@@ -153,7 +151,7 @@ public class ResultSetConverterBlockServiceImpl implements ResultSetConverterBlo
     Assert.isTrue(1 == procedureInfo.getResultSetColumns().size(), "Count of columns in result set must be equals 1");
 
     ResultSetColumnInfo columnInfo = procedureInfo.getResultSetColumns().get(0);
-    return new ResultSetConverterBlockSimpleType( converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName() );
+    return new ResultSetConverterBlockSimpleType( converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName(), type);
   }
 
   /**
@@ -171,7 +169,7 @@ public class ResultSetConverterBlockServiceImpl implements ResultSetConverterBlo
 
     ResultSetColumnInfo columnInfo = procedureInfo.getResultSetColumns().get(0);
     return new ResultSetConverterBlockSimpleTypeList(
-        converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName());
+        converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName(), type);
   }
 
   /**
@@ -189,7 +187,7 @@ public class ResultSetConverterBlockServiceImpl implements ResultSetConverterBlo
 
     ResultSetColumnInfo columnInfo = procedureInfo.getResultSetColumns().get(0);
     return new ResultSetConverterBlockSimpleTypeIterator(
-        converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName());
+        converterService.getConverter(columnInfo.getDataType(), type), columnInfo.getColumnName(), type);
   }
 
   /**
@@ -320,8 +318,12 @@ public class ResultSetConverterBlockServiceImpl implements ResultSetConverterBlo
         try {
           IParameterConverter paramConverter = converterService
               .getConverter(resultSetColumnInfo.getDataType(), getterMethod.getReturnType());
-          list.add(new EntityPropertySetter(setterMethod, paramConverter,
-              resultSetColumnInfo.getColumnName(), null, resultSetColumnInfo.getDataType()));
+          list.add(
+                  new EntityPropertySetter(
+                          setterMethod, paramConverter, resultSetColumnInfo.getColumnName(), getterMethod.getReturnType(),
+                          null, resultSetColumnInfo.getDataType()
+                  )
+          );
         } catch (IllegalStateException e) {
           throw new IllegalStateException(String.format(
               "Converter was not found for method %s.%s() [ column '%s' in procedure %s()]",

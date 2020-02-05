@@ -20,11 +20,11 @@ public class ParameterConverter_DECIMAL_BigDecimal
         aStmt.setBigDecimal(aArgument, aValue);
     }
 
-    public BigDecimal getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public BigDecimal getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getBigDecimal(aParameterName);
     }
 
-    public BigDecimal getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public BigDecimal getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getBigDecimal(aParameterName);
     }
 

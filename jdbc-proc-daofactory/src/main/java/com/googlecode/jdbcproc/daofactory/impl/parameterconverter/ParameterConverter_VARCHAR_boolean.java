@@ -21,13 +21,13 @@ public class ParameterConverter_VARCHAR_boolean
     stmt.setString(parameterName, strValue);
   }
 
-  public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName)
+  public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType)
       throws SQLException {
     String strValue = aStmt.getString(aParameterName);
     return "Y".equals(strValue);
   }
 
-  public Boolean getFromResultSet(ResultSet resultSet, String parameterName) throws SQLException {
+  public Boolean getFromResultSet(ResultSet resultSet, String parameterName, Class parameterType) throws SQLException {
     String strValue = resultSet.getString(parameterName);
     return "Y".equals(strValue);
   }

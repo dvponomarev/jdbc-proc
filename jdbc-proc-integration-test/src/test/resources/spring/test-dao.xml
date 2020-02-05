@@ -65,6 +65,10 @@
     <bean id="singlePropertyEntityDao" parent="abstractDao">
         <property name="interface" value="com.googlecode.jdbcproc.daofactory.it.testdao.dao.ISinglePropertyEntityDao"/>
     </bean>
+
+    <bean id="productDao" parent="abstractDao">
+        <property name="interface" value="com.googlecode.jdbcproc.daofactory.it.testdao.dao.IProductDao"/>
+    </bean>
     
     <!-- Employee service -->
     <bean id="employeeService" class="com.googlecode.jdbcproc.daofactory.it.testdao.service.impl.EmployeeServiceImpl">

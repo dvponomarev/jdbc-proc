@@ -25,12 +25,12 @@ public class ParameterConverter_REAL_langDouble
         }
     }
 
-    public Double getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Double getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         Double value = aStmt.getDouble(aParameterName);
         return aStmt.wasNull() ? null : value;
     }
 
-    public Double getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Double getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         Double value = aResultSet.getDouble(aParameterName);
         return aResultSet.wasNull() ? null : value;
     }

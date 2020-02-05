@@ -13,9 +13,10 @@ import java.util.Objects;
  */
 public class ResultSetConverterBlockSimpleTypeIterator implements IResultSetConverterBlock {
 
-    public ResultSetConverterBlockSimpleTypeIterator(IParameterConverter aConverter, String aColumnName) {
+    public ResultSetConverterBlockSimpleTypeIterator(IParameterConverter aConverter, String aColumnName, Class aParameterType) {
         theConverter = aConverter;
         theColumnName = aColumnName;
+        theParameterType = aParameterType;
     }
 
     public Object convertResultSet(final ResultSet aResultSet, final CallableStatement aStmt) throws SQLException {
@@ -28,7 +29,7 @@ public class ResultSetConverterBlockSimpleTypeIterator implements IResultSetConv
             @Override
             protected Object readCurrentRow(ResultSet resultSet) {
                 try {
-                    return theConverter.getFromResultSet(aResultSet, theColumnName);
+                    return theConverter.getFromResultSet(aResultSet, theColumnName, theParameterType);
                 } catch (SQLException e) {
                     throw new IllegalStateException("Error getting value for column "+theColumnName);
                 }
@@ -49,5 +50,6 @@ public class ResultSetConverterBlockSimpleTypeIterator implements IResultSetConv
 
     private final IParameterConverter theConverter;
     private String theColumnName;
+    private final Class theParameterType;
 
 }

@@ -23,12 +23,12 @@ public class ParameterConverter_INTEGER_langInteger
         }
     }
 
-    public Integer getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Integer getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         Integer value = aStmt.getInt(aParameterName);
         return aStmt.wasNull() ? null : value;
     }
 
-    public Integer getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Integer getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         Integer value = aResultSet.getInt(aParameterName);
         return aResultSet.wasNull() ? null : value;
     }

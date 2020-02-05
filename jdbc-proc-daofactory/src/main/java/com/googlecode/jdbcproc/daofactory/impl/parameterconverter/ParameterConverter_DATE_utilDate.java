@@ -24,11 +24,11 @@ public class ParameterConverter_DATE_utilDate
         }
     }
 
-    public java.util.Date getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public java.util.Date getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getDate(aParameterName);
     }
 
-    public java.util.Date getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public java.util.Date getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getDate(aParameterName);
     }
 

@@ -20,11 +20,11 @@ public class ParameterConverter_BINARY_byteArray
         aStmt.setBytes(aArgument, aValue);
     }
 
-    public byte[] getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public byte[] getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getBytes(aParameterName);
     }
 
-    public byte[] getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public byte[] getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getBytes(aParameterName);
     }
 

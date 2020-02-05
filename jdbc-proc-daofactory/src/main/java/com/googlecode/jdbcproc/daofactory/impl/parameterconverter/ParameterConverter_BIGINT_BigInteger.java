@@ -26,11 +26,11 @@ public class ParameterConverter_BIGINT_BigInteger
         }
     }
 
-    public BigInteger getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public BigInteger getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return new BigInteger(aStmt.getString(aParameterName));
     }
 
-    public BigInteger getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public BigInteger getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return new BigInteger(aResultSet.getString(aParameterName));
     }
 

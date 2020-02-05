@@ -20,12 +20,12 @@ public class ParameterConverter_CHAR_String
     stmt.setString(parameterName, value);
   }
 
-  public String getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName)
+  public String getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType)
       throws SQLException {
     return aStmt.getString(aParameterName);
   }
 
-  public String getFromResultSet(ResultSet resultSet, String parameterName) throws SQLException {
+  public String getFromResultSet(ResultSet resultSet, String parameterName, Class parameterType) throws SQLException {
     return resultSet.getString(parameterName);
   }
 

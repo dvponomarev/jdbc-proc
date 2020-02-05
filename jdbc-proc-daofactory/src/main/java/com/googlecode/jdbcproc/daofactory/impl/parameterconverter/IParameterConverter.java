@@ -4,10 +4,8 @@ import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.ICallableStatementGetS
 import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.ICallableStatementSetStrategy;
 import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.StatementArgument;
 
-import java.sql.CallableStatement;
 import java.sql.SQLException;
 import java.sql.ResultSet;
-import java.sql.PreparedStatement;
 
 /**
  * Sets parameter
@@ -70,18 +68,20 @@ public interface IParameterConverter<T extends IParameterConverter, V> {
      * Returns output parameter, converted to disired java type
      * @param aStmt          callable statement
      * @param aStatementArgument parameter name
+     * @param aParameterType
      * @return               converted value
      * @throws SQLException on error
      */
-    V getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aStatementArgument) throws SQLException;
+    V getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aStatementArgument, Class aParameterType) throws SQLException;
 
     /**
      * Gets value from result set
      * @param aResultSet result set
      * @param aParameterName parameter name
+     * @param parameterType
      * @return converted value on error
      */
-    V getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException;
+    V getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException;
 
 
     /**

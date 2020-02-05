@@ -19,11 +19,11 @@ public class ParameterConverter_VARCHAR_String
         aStmt.setString(aArgument, aValue);
     }
 
-    public String getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public String getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getString(aParameterName);
     }
 
-    public String getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public String getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getString(aParameterName);
     }
 

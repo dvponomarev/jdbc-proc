@@ -26,12 +26,12 @@ public class ParameterConverter_NUMERIC_langDouble
         }
     }
 
-    public Double getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Double getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         BigDecimal decValue = aStmt.getBigDecimal(aParameterName);
         return decValue != null ? decValue.doubleValue() : null;
     }
 
-    public Double getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Double getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         BigDecimal decValue = aResultSet.getBigDecimal(aParameterName);
         return decValue != null ? decValue.doubleValue() : null;
     }

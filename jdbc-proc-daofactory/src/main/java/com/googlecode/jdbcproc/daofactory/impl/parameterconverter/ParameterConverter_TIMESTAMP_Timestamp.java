@@ -23,11 +23,11 @@ public class ParameterConverter_TIMESTAMP_Timestamp
         }
     }
 
-    public Timestamp getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Timestamp getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getTimestamp(aParameterName);
     }
 
-    public Timestamp getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Timestamp getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getTimestamp(aParameterName);
     }
 

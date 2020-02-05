@@ -23,12 +23,12 @@ public class ParameterConverter_INTEGER_langLong
         }
     }
 
-    public Long getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Long getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         Long value = aStmt.getLong(aParameterName);
         return aStmt.wasNull() ? null : value;
     }
 
-    public Long getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Long getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         Long value = aResultSet.getLong(aParameterName);
         return aResultSet.wasNull() ? null : value;
     }

@@ -43,6 +43,7 @@ public abstract class DatabaseAwareTest extends AbstractDependencyInjectionSprin
         executeSql("jdbcprocdb", "employee.sql");
         executeSql("jdbcprocdb", "certificate.sql");
         executeSql("jdbcprocdb", "ancestry.sql");
+        executeSql("jdbcprocdb", "product/product.sql");
         executeSql("jdbcprocdb", "verticality/carabiner.sql");
         executeSql("jdbcprocdb", "verticality/dynamic_rope.sql");
         executeSql("jdbcprocdb", "verticality/harness.sql");
@@ -63,6 +64,12 @@ public abstract class DatabaseAwareTest extends AbstractDependencyInjectionSprin
         executeSql("jdbcprocdb", "create_entity_with_two_lists.sql");
         executeSql("jdbcprocdb", "create_entity_with_two_lists_and_metalogin_info.sql");
         executeSql("jdbcprocdb", "update_entity_with_list.sql");
+        executeSql("jdbcprocdb", "product/create_product1.sql");
+        executeSql("jdbcprocdb", "product/create_product2.sql");
+        executeSql("jdbcprocdb", "product/get_products.sql");
+        executeSql("jdbcprocdb", "product/get_product_by_id.sql");
+        executeSql("jdbcprocdb", "product/get_product_type_by_id.sql");
+        executeSql("jdbcprocdb", "product/upload_products.sql");
 
         executeSql("jdbcprocdb", "verticality/create_collections.prc");
         executeSql("jdbcprocdb", "verticality/upload_carabiners.prc");

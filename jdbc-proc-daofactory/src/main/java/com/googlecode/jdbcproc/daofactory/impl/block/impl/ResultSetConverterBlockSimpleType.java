@@ -12,14 +12,15 @@ import java.sql.SQLException;
  */
 public class ResultSetConverterBlockSimpleType implements IResultSetConverterBlock {
 
-    public ResultSetConverterBlockSimpleType(IParameterConverter aConverter, String aColumnName) {
+    public ResultSetConverterBlockSimpleType(IParameterConverter aConverter, String aColumnName, Class aParameterType) {
         theConverter = aConverter;
         theColumnName = aColumnName;
+        theParameterType = aParameterType;
     }
 
     public Object convertResultSet(ResultSet aResultSet, CallableStatement aStmt) throws SQLException {
         if(aResultSet.next()) {
-            Object value = theConverter.getFromResultSet(aResultSet, theColumnName);
+            Object value = theConverter.getFromResultSet(aResultSet, theColumnName, theParameterType);
             if(aResultSet.next()) {
                 throw new IllegalStateException("Result set must return only one record");
             }
@@ -38,4 +39,5 @@ public class ResultSetConverterBlockSimpleType implements IResultSetConverterBlo
 
     private final IParameterConverter theConverter;
     private String theColumnName;
+    private final Class theParameterType;
 }

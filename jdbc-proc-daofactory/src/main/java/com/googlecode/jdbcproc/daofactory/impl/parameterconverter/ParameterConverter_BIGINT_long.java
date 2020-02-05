@@ -23,11 +23,11 @@ public class ParameterConverter_BIGINT_long
         }
     }
 
-    public Long getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Long getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getLong(aParameterName);
     }
 
-    public Long getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Long getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getLong(aParameterName);
     }
 

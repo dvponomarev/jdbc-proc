@@ -18,7 +18,6 @@ import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.ICallableStatementGetS
 import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.ICallableStatementSetStrategy;
 import com.googlecode.jdbcproc.daofactory.impl.dbstrategy.StatementArgument;
 
-import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Time;
@@ -42,12 +41,12 @@ public class ParameterConverter_TIME_Time
         }
     }
 
-    public Time getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName)
+    public Time getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType)
       throws SQLException {
         return aStmt.getTime(aParameterName);
     }
 
-    public Time getFromResultSet(ResultSet resultSet, String parameterName) throws SQLException {
+    public Time getFromResultSet(ResultSet resultSet, String parameterName, Class parameterType) throws SQLException {
         return resultSet.getTime(parameterName);
     }
 

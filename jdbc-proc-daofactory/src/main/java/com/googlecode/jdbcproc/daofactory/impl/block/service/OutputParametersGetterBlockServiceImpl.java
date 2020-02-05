@@ -54,8 +54,12 @@ public class OutputParametersGetterBlockServiceImpl implements OutputParametersG
           Method setterMethod = BlockFactoryUtils.findSetterMethod(entityClass, getterMethod);
           IParameterConverter paramConverter = converterService
               .getConverter(argumentInfo.getDataType(), getterMethod.getReturnType());
-          setters.add(new EntityPropertySetter(setterMethod, paramConverter
-              , argumentInfo.getColumnName(), argumentInfo.getStatementArgument(), argumentInfo.getDataType()));
+          setters.add(
+                  new EntityPropertySetter(
+                          setterMethod, paramConverter, argumentInfo.getColumnName(), getterMethod.getReturnType(),
+                          argumentInfo.getStatementArgument(), argumentInfo.getDataType()
+                  )
+          );
         }
       }
       return setters.size() > 0 ? new OutputParametersGetterBlockEntity(setters, entityParameterIndex) : null;
@@ -120,7 +124,7 @@ public class OutputParametersGetterBlockServiceImpl implements OutputParametersG
       StoredProcedureArgumentInfo procedureReturn = getOutputParameter(procedureInfo.getArguments());
       return new OutputParametersGetterHasReturnBlock(
           converterService.getConverter(procedureReturn.getDataType(), methodReturnType)
-          , procedureReturn.getStatementArgument());
+          , procedureReturn.getStatementArgument(), methodReturnType);
     }
 
     private StoredProcedureArgumentInfo getOutputParameter(

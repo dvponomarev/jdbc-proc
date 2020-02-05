@@ -25,11 +25,11 @@ public class ParameterConverter_TIMESTAMP_utilDate
         }
     }
 
-    public java.util.Date getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public java.util.Date getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         return aStmt.getTimestamp(aParameterName);
     }
 
-    public Date getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Date getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         return aResultSet.getTimestamp(aParameterName);
     }
 

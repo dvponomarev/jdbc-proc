@@ -87,6 +87,9 @@ public class ParameterConverterServiceImpl implements ParameterConverterService 
     putSetters(settersMap, new ParameterConverter_DOUBLE_double());
     putSetters(settersMap, new ParameterConverter_DOUBLE_langDouble());
 
+    // Enum
+    putSetters(settersMap, new ParameterConverter_VARCHAR_Enum());
+
     parameterSetters = Collections.unmodifiableMap(settersMap);
   }
   
@@ -100,6 +103,9 @@ public class ParameterConverterServiceImpl implements ParameterConverterService 
   }
 
   public IParameterConverter getConverter(int sqlType, Class javaType) {
+    if (javaType.isEnum()) {
+      javaType = Enum.class;
+    }
     IParameterConverter converter 
         = parameterSetters.get(new IParameterConverter.Type(sqlType, javaType));
     if (converter == null) {

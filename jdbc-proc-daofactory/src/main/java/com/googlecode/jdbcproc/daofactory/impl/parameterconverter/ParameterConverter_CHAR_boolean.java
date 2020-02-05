@@ -20,12 +20,12 @@ public class ParameterConverter_CHAR_boolean
         aStmt.setString(aArgument, strValue);
     }
 
-    public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         String strValue = aStmt.getString(aParameterName);
         return "Y".equals(strValue);
     }
 
-    public Boolean getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Boolean getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         String strValue = aResultSet.getString(aParameterName);
         return "Y".equals(strValue);
     }

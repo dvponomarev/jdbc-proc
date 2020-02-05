@@ -20,12 +20,12 @@ public class ParameterConverter_INTEGER_boolean
         aStmt.setInt(aArgument, intValue);
     }
 
-    public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName) throws SQLException {
+    public Boolean getOutputParameter(ICallableStatementGetStrategy aStmt, StatementArgument aParameterName, Class aParameterType) throws SQLException {
         int intValue = aStmt.getInt(aParameterName);
         return intValue==1;
     }
 
-    public Boolean getFromResultSet(ResultSet aResultSet, String aParameterName) throws SQLException {
+    public Boolean getFromResultSet(ResultSet aResultSet, String aParameterName, Class parameterType) throws SQLException {
         int intValue = aResultSet.getInt(aParameterName);
         return intValue==1;
     }

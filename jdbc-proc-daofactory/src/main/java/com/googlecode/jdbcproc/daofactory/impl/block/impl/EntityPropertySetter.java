@@ -17,23 +17,25 @@ public class EntityPropertySetter {
     public EntityPropertySetter(Method aSetterMethod
             , IParameterConverter aConverter
             , String aParameterName
+            , Class aParameterType
             , StatementArgument aStatementArgument
             , int aSqlType
     ) {
         theConverter = aConverter;
         theSetterMethod = aSetterMethod;
         theParameterName = aParameterName;
+        theParameterType = aParameterType;
         theSqlType = aSqlType;
         theStatementArgument = aStatementArgument;
     }
 
     public void fillProperty(Object aEntity, ResultSet aResultSet) throws InvocationTargetException, IllegalAccessException, SQLException {
-        Object value = theConverter.getFromResultSet(aResultSet, theParameterName);
+        Object value = theConverter.getFromResultSet(aResultSet, theParameterName, theParameterType);
         setProperty(aEntity, value);
     }
 
     public void fillOutputParameter(Object aEntity, ICallableStatementGetStrategy aStmt) throws InvocationTargetException, IllegalAccessException, SQLException {
-        Object value = theConverter.getOutputParameter(aStmt, theStatementArgument);
+        Object value = theConverter.getOutputParameter(aStmt, theStatementArgument, theParameterType);
         setProperty(aEntity, value);
     }
 
@@ -61,6 +63,7 @@ public class EntityPropertySetter {
     private final IParameterConverter theConverter;
     private final Method theSetterMethod;
     private final String theParameterName;
+    private final Class theParameterType;
     private final int theSqlType;
     private final StatementArgument theStatementArgument;
 }
